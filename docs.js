@@ -4,14 +4,15 @@ var ReactZeroClipboard = require('./');
 window.d = ReactDOM;
 var npmInstallCommand = "npm install react-zeroclipboard";
 var zclipProps = {
-  swfPath: './assets/ZeroClipboard.swf'
+  swfPath: './assets/zeroclipboard/ZeroClipboard.swf',
+  jsPath:'./assets/zeroclipboard/ZeroClipboard.min.js'
 };
 
 NpmInstallLink = React.createClass({
     render: function(){
         return (
         <div className="input-group">
-            <input className="form-control input-lg" value={npmInstallCommand} />      
+            <input className="form-control input-lg" value={npmInstallCommand} />
             <ReactZeroClipboard text={npmInstallCommand} {...zclipProps}>
                 <span className="input-group-addon" style={{cursor: 'pointer'}}>Copy</span>
             </ReactZeroClipboard>
@@ -34,12 +35,12 @@ var MultiTypeDemo = React.createClass({
     getHtml: function(){
         var items = list.map(function(x, i){
             if (i % 2) {
-                return "<li>" + x + "</li>" ;    
+                return "<li>" + x + "</li>" ;
             }
             else {
                 return "<li class='even'>" + x + "</li>" ;
             }
-            
+
         });
         return "<ul>" + items.join('\n') + "<ul>";
     },
@@ -80,14 +81,14 @@ var EventsDemo = React.createClass({
     },
     render: function(){
         var styl = {
-            padding: "10px", 
+            padding: "10px",
             border: "1px solid #eee",
             borderRadius: "7px"
         };
-        
+
         return (
         <div>
-            <div><ReactZeroClipboard text="example text" 
+            <div><ReactZeroClipboard text="example text"
                 onCopy={this.getLogger("copy")}
                 onAfterCopy={this.getLogger("afterCopy")}
                 onError={this.getLogger("error")}
@@ -98,7 +99,7 @@ var EventsDemo = React.createClass({
                 </ReactZeroClipboard></div>
             <div style={styl}><ol>{this.state.logs.map(function(log, i){
                 var out = {};
-                
+
                 for (var key in log.event) {
                     if (log.event[key] instanceof window.Element) {
                         out[key] = String(log.event[key]);

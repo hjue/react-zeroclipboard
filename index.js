@@ -61,7 +61,8 @@ var handleZeroClipLoad = function(error){
     delete global.ZeroClipboard;
 
     ZeroClipboard.config({
-        swfPath: globalConfig.swfPath
+        swfPath: globalConfig.swfPath,
+        jsPath: globalConfig.jsPath
     });
 
     client = new ZeroClipboard();
@@ -120,6 +121,10 @@ function setUserDefinedSwfPath(path){
   globalConfig = Object.assign(globalConfig, {swfPath: path})
 }
 
+function setUserDefinedJsPath(path){
+  globalConfig = Object.assign(globalConfig, {jsPath: path})
+}
+
 // <ReactZeroClipboard
 //   text="text to copy"
 //   html="<b>html to copy</b>"
@@ -139,6 +144,10 @@ var ReactZeroClipboard = React.createClass({
     ready: function(cb){
         if (null != this.props.swfPath) {
           setUserDefinedSwfPath(this.props.swfPath);
+        }
+
+        if (null != this.props.jsPath) {
+          setUserDefinedJsPath(this.props.jsPath);
         }
 
         findOrLoadZeroClipboard();
